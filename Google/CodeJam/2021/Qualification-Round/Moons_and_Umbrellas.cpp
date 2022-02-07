@@ -3,38 +3,12 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <climits>
 using namespace std;
 
-// CJ -> X
-// JC -> Y
-// if x or y is positive then approach will be to avoid JC/CJ
-// J?J | ?J | J? -> J -> 0
-// C?C | ?C | C? -> C -> 0
-// J?C -> J/C -> Y
-// C?J -> J/C -> X
-
-// If C comes after J -> add Y
-// If J comes after C -> add X
-
-// x negative -> Try to add CJ
-// J?J ->
-// ?J -> C -> X
-// J? -> J -> 0
-// C?C ->
-// ?C -> C -> 0
-// C? -> J -> X
-// J?C -> J/C -> Y
-// C?J -> J/C -> X
-
-// y negative
-
-// x and y negative
-// J?J | ?J | J? -> C -> Y
-// C?C | ?C | C? -> J -> X
-// J?C -> J/C -> Y
-// C?J -> J/C -> X
-
-int getMinCost(string s, int x, int y)
+// Works for positive x,y
+// For test 1 and 2
+int getMinCost_Greedy(string s, int x, int y)
 {
     char lastChar = '\0';
     int minCost = 0;
@@ -55,6 +29,42 @@ int getMinCost(string s, int x, int y)
     }
     return minCost;
 }
+
+// Works for all
+// For test 1,2,3
+int getMinCost_DP(string s, int x, int y)
+{
+    int n = s.length();
+    int dp[1000][2];
+    for (int i = 1; i < n; i++)
+    {
+        dp[i][0] = dp[i][1] = INT_MAX;
+    }
+    dp[0][0] = dp[0][1] = 0;
+    for (int i = 0; i < n - 1; i++)
+    {
+        // Thus it will also handle '?'
+        if (s[i] != 'J') // C
+        {
+            dp[i + 1][0] = min(dp[i + 1][0], dp[i][0]);     // CC | ?C
+            dp[i + 1][1] = min(dp[i + 1][1], x + dp[i][0]); // CJ | ?C
+        }
+        if (s[i] != 'C') // J
+        {
+            dp[i + 1][0] = min(dp[i + 1][0], y + dp[i][1]); // JC | ?C
+            dp[i + 1][1] = min(dp[i + 1][1], dp[i][1]);     // JJ | ?J
+        }
+    }
+    if (s[n - 1] == 'C')
+    {
+        return dp[n - 1][0];
+    }
+    if (s[n - 1] == 'J')
+    {
+        return dp[n - 1][1];
+    }
+    return min(dp[n - 1][0], dp[n - 1][1]);
+}
 int main()
 {
     int T;
@@ -64,6 +74,6 @@ int main()
         int x, y; // 1<= x,y <= 100
         string s; // 1<= |S| <= 1000
         cin >> x >> y >> s;
-        printf("Case #%d: %d\n", t, getMinCost(s, x, y));
+        printf("Case #%d: %d\n", t, getMinCost_DP(s, x, y));
     }
 }
