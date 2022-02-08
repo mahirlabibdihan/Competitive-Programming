@@ -4,6 +4,11 @@
     "xstring": "cpp",
     "utility": "cpp",
     "iostream": "cpp",
-    "ostream": "cpp"
+    "ostream": "cpp",
+    "algorithm": "cpp",
+    "iterator": "cpp",
+    "xmemory": "cpp",
+    "xtree": "cpp",
+    "xutility": "cpp"
   }
 }
