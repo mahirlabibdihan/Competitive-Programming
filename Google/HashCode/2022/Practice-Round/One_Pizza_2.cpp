@@ -1,16 +1,10 @@
-// https://codingcompetitions.withgoogle.com/hashcode/round/00000000008f5ca9/00000000008f6f33
-#include <iostream>
-#include <vector>
-#include <map>
-using namespace std;
-
 // There can be 10^6 unique ingredients
 vector<bool> taken(1000000);
 vector<string> ingredients;
 map<string, pair<vector<int>, vector<int>>> ing;
 
 // There is 3 parameters. And there are no overlapping subproblem
-int dp[100000];
+/*int dp[100000];
 int DnC(int n, int type, vector<bool> removed)
 {
     if (n < 0)
@@ -78,48 +72,7 @@ vector<string> solve(vector<vector<string>> likes, vector<vector<string>> dislik
     for (auto i : ing)
     {
         ingredients.push_back(i.first);
-        /*cout << i.first << "->";
-        for (auto j : i.second.first)
-        {
-            cout << j << " ";
-        }
-        cout << "| ";
-        for (auto j : i.second.second)
-        {
-            cout << j << " ";
-        }
-        cout << endl;*/
     }
     cout << DnC(ingredients.size(), -1, vector<bool>(n)) << endl;
     return vector<string>();
-}
-int main()
-{
-    int nClient;
-    cin >> nClient;
-    vector<vector<string>> likes(nClient), dislikes(nClient);
-    for (int i = 0; i < nClient; i++)
-    {
-        int nLikes, nDislikes;
-        cin >> nLikes;
-        for (int j = 0; j < nLikes; j++)
-        {
-            string s;
-            cin >> s;
-            likes[i].push_back(s);
-        }
-        cin >> nDislikes;
-        for (int j = 0; j < nDislikes; j++)
-        {
-            string s;
-            cin >> s;
-            dislikes[i].push_back(s);
-        }
-    }
-    vector<string> result = solve(likes, dislikes);
-    cout << result.size() << " ";
-    for (string s : result)
-    {
-        cout << s << " ";
-    }
-}
+}*/
