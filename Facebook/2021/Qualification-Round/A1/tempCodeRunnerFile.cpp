@@ -1,0 +1,1 @@
+    // freopen("consistency_chapter_2_input.txt", "r", stdin);

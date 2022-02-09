@@ -10,9 +10,74 @@ using namespace std;
 // C - 5
 // D - 1708
 // E - 2025
+vector<vector<int>> adj(100000);
+int n;
+vector<int> optimize(vector<bool> visited, vector<int> degree, int count, int pos)
+{
+    // cout << ".";
+    // cout << pos << endl;
+    // cout << "PASS" << endl;
+    if (pos != -1)
+    {
+        visited[pos] = true;
+        count++;
+        for (int i : adj[pos])
+        {
+            if (!visited[i])
+            {
+                visited[i] = true;
+                count++;
+                for (int j : adj[i])
+                {
+                    if (!visited[j])
+                    {
+                        degree[j]--;
+                    }
+                }
+            }
+        }
+    }
+    // cout << "PASS" << endl;
+    int minDegree = -1;
+    for (int i = 0; i < n; i++)
+    {
+        if (!visited[i])
+        {
+            if (minDegree == -1)
+            {
+                minDegree = i;
+            }
+            else if (degree[minDegree] > degree[i])
+            {
+                minDegree = i;
+            }
+        }
+    }
+    // cout << "PASS" << endl;
+    vector<int> result;
+    if (minDegree != -1)
+    {
+
+        for (int i = 0; i < n; i++)
+        {
+            if (!visited[i] && degree[i] == degree[minDegree])
+            {
+                vector<int> temp = optimize(visited, degree, count, i);
+                if (temp.size() > result.size())
+                {
+                    result = temp;
+                }
+            }
+        }
+    }
+    if (pos != -1)
+        result.push_back(pos);
+    cout << result.size() << endl;
+    return result;
+}
 vector<string> solve(vector<vector<string>> likes, vector<vector<string>> dislikes)
 {
-    int n = likes.size();
+    n = likes.size();
     map<string, pair<vector<int>, vector<int>>> ing;
     for (int i = 0; i < n; i++)
     {
@@ -25,7 +90,6 @@ vector<string> solve(vector<vector<string>> likes, vector<vector<string>> dislik
             ing[s].second.push_back(i);
         }
     }
-    vector<vector<int>> adj(n);
     vector<int> degree(n, 0);
     vector<bool> visited(n, false);
     int count = 0;
@@ -43,51 +107,24 @@ vector<string> solve(vector<vector<string>> likes, vector<vector<string>> dislik
         }
     }
 
-    vector<int> result;
-    while (count < n)
-    {
-        int minDegree = -1;
-        for (int i = 0; i < n; i++)
-        {
-            // cout << degree[i] << " ";
-            if (!visited[i] && (minDegree == -1 || degree[minDegree] > degree[i]))
-            {
-                minDegree = i;
-            }
-        }
-        // cout << minDegree << endl;
-        visited[minDegree] = true;
-        count++;
-        result.push_back(minDegree);
-        for (int i : adj[minDegree])
-        {
-            if (!visited[i])
-            {
-                visited[i] = true;
-                count++;
-                for (int j : adj[i])
-                {
-                    if (!visited[j])
-                    {
-                        degree[j]--;
-                    }
-                }
-            }
-        }
-    }
     vector<string> all;
     for (auto i : ing)
     {
         all.push_back(i.first);
     }
+
+    vector<int> result = optimize(visited, degree, count, -1);
+    // cout << result.size() << endl;
     map<string, bool> isDislike;
     for (int i : result)
     {
+        cout << i << " ";
         for (string s : dislikes[i])
         {
             isDislike[s] = true;
         }
     }
+    // cout << "DONE" << endl;
     vector<string> ingredients;
     for (string s : all)
     {
@@ -96,12 +133,12 @@ vector<string> solve(vector<vector<string>> likes, vector<vector<string>> dislik
             ingredients.push_back(s);
         }
     }
+    // cout << "DONE" << endl;
     return ingredients;
 }
 int main()
 {
-    freopen("in.txt", "r", stdin);
-    freopen("out.txt", "w", stdout);
+    freopen("input2.txt", "r", stdin);
     int nClient;
     cin >> nClient;
     vector<vector<string>> likes(nClient), dislikes(nClient);
@@ -124,6 +161,7 @@ int main()
         }
     }
     vector<string> result = solve(likes, dislikes);
+    freopen("output2.txt", "w", stdout);
     cout << result.size() << " ";
     for (string s : result)
     {
