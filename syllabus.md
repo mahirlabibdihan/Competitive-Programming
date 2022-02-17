@@ -33,7 +33,8 @@ Binary Search
 
 # Divide and Conquer
 
-Inversion Count
+Merge Sort - {Inversion Count}
+Quick Sort
 
 # Greedy
 
@@ -52,6 +53,8 @@ Longest common subsequence
 Edit Distance
 
 # Tree Algorithms
+
+Inorder-Preorder-Postorder Traversal
 
 # Graph Algorithms
 
@@ -74,7 +77,7 @@ N Queen Problem
 
 # Number Theory
 
-Sieve of Eratosthenes
+Sieve of Eratosthenes - {Count divisors}
 
 # Bitmasking
 
