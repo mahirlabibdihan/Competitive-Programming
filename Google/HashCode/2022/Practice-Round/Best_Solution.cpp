@@ -1,3 +1,4 @@
+// Mahir Labib Dihan
 // https://codingcompetitions.withgoogle.com/hashcode/round/00000000008f5ca9/00000000008f6f33
 #include <iostream>
 #include <vector>
@@ -10,7 +11,6 @@ using namespace std;
 // C - 5
 // D - 1728
 // E - 2069
-
 int calculateRemovedEdges(vector<vector<int>> adj, vector<bool> visited, int i)
 {
     int count = 0;

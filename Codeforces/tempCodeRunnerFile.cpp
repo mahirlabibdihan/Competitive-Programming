@@ -1,2 +1,2 @@
-        // if (j == 2 && t == 100)
-        //     cout << n << endl;
+    // freopen("input.txt", "r", stdin);
+    // freopen("output.txt", "w", stdout);

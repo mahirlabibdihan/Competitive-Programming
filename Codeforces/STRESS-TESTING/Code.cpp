@@ -22,12 +22,17 @@ void solve()
         }
         else if (curr < a[i])
         {
-            if (rem == 0)
+            if (rem)
+            {
+                rem = a[i] - 1 - (curr - rem);
+                curr = a[i];
+            }
+            else
             {
                 count++;
+                rem = a[i] - 1 - (curr - rem);
+                curr = a[i];
             }
-            rem = a[i] - 1 - (curr - rem);
-            curr = a[i];
         }
     }
     cout << count << endl;

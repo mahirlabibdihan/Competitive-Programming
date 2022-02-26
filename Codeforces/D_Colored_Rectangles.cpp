@@ -1,35 +1,33 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <tuple>
-#include <map>
 using namespace std;
 
-//Compiler version g++ 6.3.0
-
-map<tuple<int, int, int>, bool> visited;
-map<tuple<int, int, int>, int> dp;
-vector<int> r, g, b;
-int solve(int iR, int iG, int iB)
+int solve(vector<int> r, int nR, vector<int> g, int nG, vector<int> b, int nB)
 {
-    int &area = dp[{iR, iG, iB}];
-    if (visited[{iR, iG, iB}])
-        return area;
-    visited[{iR, iG, iB}] = true;
-
-    if (iG >= 0 && iB >= 0)
+    int dp[nR + 1][nG + 1][nB + 1] = {};
+    for (int iR = 0; iR <= nR; iR++)
     {
-        area = max(area, g[iG] * b[iB] + solve(iR, iG - 1, iB - 1));
+        for (int iG = 0; iG <= nG; iG++)
+        {
+            for (int iB = 0; iB <= nB; iB++)
+            {
+                if (iG > 0 && iB > 0)
+                {
+                    dp[iR][iG][iB] = max(dp[iR][iG][iB], g[iG - 1] * b[iB - 1] + dp[iR][iG - 1][iB - 1]);
+                }
+                if (iR > 0 && iB > 0)
+                {
+                    dp[iR][iG][iB] = max(dp[iR][iG][iB], r[iR - 1] * b[iB - 1] + dp[iR - 1][iG][iB - 1]);
+                }
+                if (iR > 0 && iG > 0)
+                {
+                    dp[iR][iG][iB] = max(dp[iR][iG][iB], r[iR - 1] * g[iG - 1] + dp[iR - 1][iG - 1][iB]);
+                }
+            }
+        }
     }
-    if (iR >= 0 && iB >= 0)
-    {
-        area = max(area, r[iR] * b[iB] + solve(iR - 1, iG, iB - 1));
-    }
-    if (iR >= 0 && iG >= 0)
-    {
-        area = max(area, r[iR] * g[iG] + solve(iR - 1, iG - 1, iB));
-    }
-    return area;
+    return dp[nR][nG][nB];
 }
 int main()
 {
@@ -51,9 +49,5 @@ int main()
     sort(g.begin(), g.end());
     sort(b.begin(), b.end());
 
-    ::r = r;
-    ::g = g;
-    ::b = b;
-
-    cout << solve(nR - 1, nG - 1, nB - 1);
+    cout << solve(r, nR, g, nG, b, nB);
 }
