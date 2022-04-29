@@ -56,14 +56,38 @@ void solve()
 {
     int n;
     cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    string s;
+    cin >> s;
+    int c = 0;
+    int flag = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (s[i] == '0')
+        {
+            if (flag == 0)
+            {
+                flag = 2;
+            }
+            else
+            {
+                c += flag;
+                flag = 2;
+            }
+        }
+        else
+        {
+            if (flag)
+            {
+                flag--;
+            }
+        }
+    }
+    cout << c << endl;
 }
 int main()
 {
     FAST_IO;
-    int T;
+    int T = 1;
     cin >> T;
     for (int t = 1; t <= T; t++)
     {

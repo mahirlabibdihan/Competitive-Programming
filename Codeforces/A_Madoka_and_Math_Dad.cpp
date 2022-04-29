@@ -54,11 +54,46 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
+    // No zero
+    // 0 -
+    // # 2- # 1 = +- 1
+    // If even number- #1=Even
+    // If odd number- #1=Odd
     int n;
     cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    if (n % 3 == 1)
+    {
+        for (int i = 0; n > 0; i++)
+        {
+            if (i % 2 == 0)
+            {
+                cout << 1;
+                n -= 1;
+            }
+            else
+            {
+                cout << 2;
+                n -= 2;
+            }
+        }
+    }
+    else
+    {
+        for (int i = 0; n > 0; i++)
+        {
+            if (i % 2 == 0)
+            {
+                cout << 2;
+                n -= 2;
+            }
+            else
+            {
+                cout << 1;
+                n -= 1;
+            }
+        }
+    }
+    cout << endl;
 }
 int main()
 {

@@ -54,11 +54,17 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
+    // Pallindrome + Valid bracket sequence
+    // First check valid bracket sequence
+    // Then
     int n;
     cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    string s;
+    cin >> s;
+    for (int i = 0; i < n; i++)
+    {
+        for(int j=)
+    }
 }
 int main()
 {

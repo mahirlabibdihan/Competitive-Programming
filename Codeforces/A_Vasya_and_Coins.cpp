@@ -54,16 +54,24 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    // 2 - 2*b
+    // 1 - a
+    uint64 a, b;
+    cin >> a >> b;
+    // 2*10^8
+    if (a == 0)
+    {
+        cout << 1 << endl;
+    }
+    else
+    {
+        cout << a + 2 * b + 1 << endl;
+    }
 }
 int main()
 {
     FAST_IO;
-    int T;
+    int T = 1;
     cin >> T;
     for (int t = 1; t <= T; t++)
     {

@@ -54,16 +54,22 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
-    int n;
+    // gcd(a,b) <= min(a,b)
+    // lcm(c,d) >= max(c,d)
+    // gcd(a,b) = lcm(c,d)
+    // max(c,d) <= min(a,b)
+    // c+d = n - (a+b)
+    // a,b,c,d >= 1
+    // gcd(a,b)*lcm(a,b) = a*b
+    // lcm(c,d)*lcm(a,b) = a*b
+    int64 n;
     cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    cout << 1 << " " << n - 3 << " " << 1 << " " << 1 << endl;
 }
 int main()
 {
     FAST_IO;
-    int T;
+    int T = 1;
     cin >> T;
     for (int t = 1; t <= T; t++)
     {

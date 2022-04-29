@@ -56,14 +56,19 @@ void solve()
 {
     int n;
     cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    if (n <= 1399)
+        cout << "Division 4" << endl;
+    else if (n <= 1599)
+        cout << "Division 3" << endl;
+    else if (n <= 1899)
+        cout << "Division 2" << endl;
+    else
+        cout << "Division 1" << endl;
 }
 int main()
 {
     FAST_IO;
-    int T;
+    int T = 1;
     cin >> T;
     for (int t = 1; t <= T; t++)
     {

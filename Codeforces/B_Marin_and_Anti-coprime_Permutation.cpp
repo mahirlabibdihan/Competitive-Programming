@@ -52,18 +52,31 @@ typedef unsigned long long uint64;
 /**********************************************/
 
 /************ SOLUTION *************/
+#define MOD 998244353
 void solve()
 {
-    int n;
+    // Even will go with odd
+    // Odd will go with even
+    int64 n;
     cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    if (n % 2 == 0)
+    {
+        int64 pro = 1;
+        for (int i = 1; i <= n / 2; i++)
+        {
+            pro = (pro * i * i) % MOD;
+        }
+        cout << pro << endl;
+    }
+    else
+    {
+        cout << 0 << endl;
+    }
 }
 int main()
 {
     FAST_IO;
-    int T;
+    int T = 1;
     cin >> T;
     for (int t = 1; t <= T; t++)
     {

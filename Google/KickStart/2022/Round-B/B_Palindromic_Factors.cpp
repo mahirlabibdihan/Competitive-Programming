@@ -52,22 +52,47 @@ typedef unsigned long long uint64;
 /**********************************************/
 
 /************ SOLUTION *************/
+int isPallindrome(int64 n)
+{
+    int64 original = n;
+    int64 reversed = 0;
+    while (n != 0)
+    {
+        int64 remainder = n % 10;
+        reversed = reversed * 10 + remainder;
+        n /= 10;
+    }
+    return (original == reversed);
+}
+int countPalindromeDivisors(int64 n)
+{
+    // Note that this loop runs till square root
+    int count = 0;
+    for (int64 i = 1; i * i <= n; i++)
+    {
+        if (n % i == 0)
+        {
+            // If divisors are equal, print only one
+            count += isPallindrome(i);
+            if (n / i != i)
+                count += isPallindrome(n / i);
+        }
+    }
+    return count;
+}
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
 }
 int main()
 {
     FAST_IO;
-    int T;
+    int T = 1;
     cin >> T;
     for (int t = 1; t <= T; t++)
     {
-        solve();
+        int64 n;
+        cin >> n;
+        cout << "Case #" << t << ": " << countPalindromeDivisors(n) << '\n';
     }
     return EXIT_SUCCESS;
 }

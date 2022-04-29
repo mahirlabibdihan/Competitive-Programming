@@ -56,9 +56,19 @@ void solve()
 {
     int n;
     cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
+    vector<int> a(n);
     cin >> a;
-    cout << a << endl;
+    vector<int> result(n, 0);
+    for (int i = n; i > 0; i--)
+    {
+        int id = find(a.begin(), a.begin() + i, i) - a.begin();
+        if (id + 1 != i)
+        {
+            rotate(a.begin(), a.begin() + id + 1, a.begin() + i);
+            result[i - 1] = id + 1;
+        }
+    }
+    cout << result << endl;
 }
 int main()
 {

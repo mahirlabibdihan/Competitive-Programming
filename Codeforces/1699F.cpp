@@ -56,14 +56,34 @@ void solve()
 {
     int n;
     cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
+    vector<int> a(n);
     cin >> a;
-    cout << a << endl;
+    int l = 0, r = n - 1;
+    int result = 0;
+    int lW = 0, rW = 0;
+    while (l <= r)
+    {
+        if (lW <= rW)
+        {
+            lW += a[l];
+            l++;
+        }
+        else
+        {
+            rW += a[r];
+            r--;
+        }
+        if (lW == rW)
+        {
+            result = l + n - 1 - r;
+        }
+    }
+    cout << result << endl;
 }
 int main()
 {
     FAST_IO;
-    int T;
+    int T = 1;
     cin >> T;
     for (int t = 1; t <= T; t++)
     {

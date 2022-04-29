@@ -54,18 +54,46 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
+    int64 n, m;
+    cin >> n >> m;
+    vector<int64> a(n);
     cin >> a;
-    cout << a << endl;
+    sort(a.begin(), a.end(), greater<int>());
+    int64 sum = 0;
+    int64 tmpSum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        tmpSum += a[i];
+        if ((i + 1) % m == 0)
+        {
+            sum += tmpSum * ((i + 1) / m);
+            tmpSum = 0;
+        }
+    }
+    sum += tmpSum * ceil(1.0 * (n) / m);
+    vector<int64> result(n);
+    result[n - 1] = sum;
+    
+    vector<int64> preSum(m, 0);
+    for (int i = 0; i < n; i++)
+    {
+        preSum[i % m] += a[i];
+    }
+    for (int i = 0; i < n; i++)
+    {
+        int64 s = 0;
+        s = preSum[i % m];
+        result[n - i - 2] = result[n - i - 1] - s;
+        preSum[i % m] -= a[i];
+    }
+    cout << result << endl;
 }
 int main()
 {
     FAST_IO;
     int T;
-    cin >> T;
-    for (int t = 1; t <= T; t++)
+    // cin >> T;
+    // for (int t = 1; t <= T; t++)
     {
         solve();
     }

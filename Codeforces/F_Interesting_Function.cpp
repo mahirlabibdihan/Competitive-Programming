@@ -52,18 +52,36 @@ typedef unsigned long long uint64;
 /**********************************************/
 
 /************ SOLUTION *************/
+vector<int> dp(11, 0);
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    // 0-100
+    // 90*1 + 9*2 + 1*3
+    // 43 - 57
+    int l, r;
+    cin >> l >> r;
+    int lC = 0, rC = 0;
+    // cout << dp << endl;
+    // l--;
+    for (int i = 1000000000, j = 10; i > 0; i /= 10, j--)
+    {
+        lC += (l / i) * dp[j];
+        rC += (r / i) * dp[j];
+        // cout << i << " " << j << endl;
+        l %= i;
+        r %= i;
+    }
+    // cout << rC << " " << lC << endl;
+    cout << rC - lC << endl;
 }
 int main()
 {
     FAST_IO;
     int T;
+    for (int i = 1; i <= 10; i++)
+    {
+        dp[i] = dp[i - 1] * 10 + 1;
+    }
     cin >> T;
     for (int t = 1; t <= T; t++)
     {

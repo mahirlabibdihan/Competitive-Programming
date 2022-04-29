@@ -56,16 +56,40 @@ void solve()
 {
     int n;
     cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    vector<int64> a(n);
+    for (int i = 0; i < n; i++)
+        cin >> a[i];
+
+    vector<int64> b(n);
+    int64 result = LLONG_MAX;
+    for (int i = 0; i < n; i++)
+    {
+        b[i] = 0;
+        int64 moves = 0;
+        for (int j = i + 1; j < n; j++)
+        {
+            b[j] = a[j] * (1 + (b[j - 1] / a[j]));
+            moves += abs(b[j] / a[j]);
+        }
+        for (int j = i - 1; j >= 0; j--)
+        {
+            b[j] = a[j] * (-1 + (b[j + 1] / a[j]));
+            moves += abs(b[j] / a[j]);
+        }
+        result = min(moves, result);
+        // cout << b << endl;
+    }
+    cout << result << endl;
+
+    // For minimum
+    // One b[i] will remain zero
 }
 int main()
 {
     FAST_IO;
-    int T;
-    cin >> T;
-    for (int t = 1; t <= T; t++)
+    int T = 1;
+    // cin >> T;
+    // for (int t = 1; t <= T; t++)
     {
         solve();
     }

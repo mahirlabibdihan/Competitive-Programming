@@ -54,16 +54,32 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    int n, m;
+    cin >> n >> m;
+    vector<string> g(n);
+    cin >> g;
+    for (int i = n - 2; i >= 0; i--)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            for (int k = i; k < n - 1; k++)
+            {
+                if (g[k][j] == '*' && g[k + 1][j] == '.')
+                {
+                    swap(g[k][j], g[k + 1][j]);
+                }
+            }
+        }
+    }
+    for (int i = 0; i < n; i++)
+    {
+        cout << g[i] << endl;
+    }
 }
 int main()
 {
     FAST_IO;
-    int T;
+    int T = 1;
     cin >> T;
     for (int t = 1; t <= T; t++)
     {

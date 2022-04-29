@@ -54,16 +54,39 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
+    int n, m;
+    cin >> n >> m;
+    vector<int64> a(n);
     cin >> a;
-    cout << a << endl;
+    if (n >= m)
+    {
+        cout << "NO" << endl;
+    }
+    else
+    {
+        //
+        sort(a.begin(), a.end(), greater<int64>());
+        // at least n chairs + a[0] + a[1] + ... +a[0]
+        int64 sum = n;
+        for (int i = 0; i < n - 1; i++)
+        {
+            sum += a[i];
+        }
+        sum += a[0];
+        if (sum > m)
+        {
+            cout << "NO" << endl;
+        }
+        else
+        {
+            cout << "YES" << endl;
+        }
+    }
 }
 int main()
 {
     FAST_IO;
-    int T;
+    int T = 1;
     cin >> T;
     for (int t = 1; t <= T; t++)
     {

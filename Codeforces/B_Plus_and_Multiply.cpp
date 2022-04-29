@@ -54,11 +54,43 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    int n, a, b;
+    cin >> n >> a >> b;
+    while (n > 1)
+    {
+        cout << n << endl;
+        if (a > 1 && n % a == 0)
+        {
+            n /= a;
+        }
+        else if (n > b)
+        {
+            if (a == 1)
+            {
+                break;
+            }
+            else
+            {
+                while (n % a && n > b)
+                {
+                    n -= b;
+                }
+            }
+        }
+        else
+        {
+            break;
+        }
+    }
+    n = 1 + (n - 1) % b;
+    if (n == 1)
+    {
+        cout << "Yes" << endl;
+    }
+    else
+    {
+        cout << "No" << endl;
+    }
 }
 int main()
 {

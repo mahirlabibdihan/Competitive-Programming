@@ -54,18 +54,45 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
+    // We may need to sort the array in increasing order
+    // freopen("output.txt", "r", stdin);
     int n;
     cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
+    vector<int> a(n);
     cin >> a;
-    cout << a << endl;
+    sort(a.begin(), a.end());
+    // Now we need to find out c, for which a[i] = c^i
+    // 1 , c , c*c , c*c*c .... , c*c*..*c <10^10
+    // cout << a << endl;
+    int64 minCost = LLONG_MAX;
+    for (int i = 1;; i++)
+    {
+        int64 cost = 0;
+        int64 c = 1;
+        for (int j = 0; j < n; j++, c *= i)
+        {
+            cost += abs(a[j] - c);
+            if (c > 100000000000000LL)
+            {
+                goto X;
+            }
+        }
+
+        if (minCost > cost)
+        {
+            // cout << i << " " << cost << endl;
+            minCost = cost;
+        }
+    }
+X:
+    cout << minCost << endl;
 }
 int main()
 {
     FAST_IO;
-    int T;
-    cin >> T;
-    for (int t = 1; t <= T; t++)
+    // int T;
+    // cin >> T;
+    // for (int t = 1; t <= T; t++)
     {
         solve();
     }

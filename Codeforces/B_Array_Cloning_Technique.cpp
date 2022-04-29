@@ -54,16 +54,53 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
-    int n;
+    int64 n;
     cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
+    vector<int64> a(n);
     cin >> a;
-    cout << a << endl;
+    map<int64, int> count;
+    int mxCount = 0;
+    for (int i = 0; i < n; i++)
+    {
+        count[a[i]]++;
+        mxCount = max(mxCount, count[a[i]]);
+    }
+
+    // mxCount -> n
+    int nCopies = 0;
+    int nSwaps = 0;
+    for (int64 i = mxCount;; i *= 2)
+    {
+        if (i < n)
+        {
+            nCopies++;
+        }
+        else
+        {
+            break;
+        }
+    }
+    cout << nCopies + n - mxCount << endl;
+
+    // 1 2 3 4 5 6
+    // 2 5 7 6 3 | 2 5 7 6 3 -> C
+    // 2 2 7 6 3 | 5 5 7 6 3 -> S
+    // 2 2 7 6 3 | 2 2 7 6 3 -> C
+    // 2 2 2 6 3 | 7 2 7 6 3 -> S
+    // 2 2 2 2 3 | 7 6 7 6 3 -> S
+    // 2 2 2 2 3 | 2 2 2 2 3 -> C
+
+    // 0 1 3 3 7 0 | 0 1 3 3 7 0
+    // 0 0 3 3 7 0 | 1 1 3 3 7 0
+    // 0 0 0 3 7 0 | 1 1 3 3 7 3
+    // 0 0 0 3 7 0 | 0 0 0 3 7 0 | 1 1 3 3 7 3
+    // 0 0 0 0 7 0 | 0 0 3 3 7 0
+    // 0 0 0 0 0 0 | 0 7 3 3 7 0
 }
 int main()
 {
     FAST_IO;
-    int T;
+    int T = 1;
     cin >> T;
     for (int t = 1; t <= T; t++)
     {

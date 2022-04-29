@@ -52,13 +52,23 @@ typedef unsigned long long uint64;
 /**********************************************/
 
 /************ SOLUTION *************/
-void solve()
+int solve()
 {
     int n;
     cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
+    vector<int> a(n);
     cin >> a;
-    cout << a << endl;
+    // min(n,max(a))
+    sort(a.begin(), a.end());
+    int result = 0;
+    for (int i : a)
+    {
+        if (i > result)
+        {
+            result++;
+        }
+    }
+    return result;
 }
 int main()
 {
@@ -67,7 +77,7 @@ int main()
     cin >> T;
     for (int t = 1; t <= T; t++)
     {
-        solve();
+        printf("Case #%d: %d\n", t, solve());
     }
     return EXIT_SUCCESS;
 }

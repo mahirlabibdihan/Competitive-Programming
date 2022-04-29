@@ -5,7 +5,7 @@
 | |    | |   | |   |  ____  |     | |
 | |____/ /___| |___| |    | |_____| |
 |_______/|_________|_|    |_________|
-M A H I R     L A B I B     D I H A N
+M A H I R     L A B I B    D I H A N
 
 */
 #include <bits/stdc++.h>
@@ -56,16 +56,25 @@ void solve()
 {
     int n;
     cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
+    vector<int> a(n);
     cin >> a;
-    cout << a << endl;
+    // We need to choose the maximum indexes so that the sum is non-negative
+    // We will take all the positive numbers, that's for sure.
+    // Then we need to follow greedy approach to choose negative numbers.
+    // If sum of all positive number is X.
+    // Then we can choose negative nummbers until sum of all negative numbers, |Y| <= X
+    // But we can not sort, as sequence is important.
+    // If we add the positive numbers between two negative number
+    // But taking the smallest negative numbers first will not always gives optimum result.
+
+    // BAAAAl
 }
 int main()
 {
     FAST_IO;
     int T;
-    cin >> T;
-    for (int t = 1; t <= T; t++)
+    // cin >> T;
+    // for (int t = 1; t <= T; t++)
     {
         solve();
     }

@@ -54,11 +54,44 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    int n, k; //  k <= n/2
+    cin >> n >> k;
+    // s should be pallindrome
+    // And substring of length k should repeat n/k times
+    // Substring of length k should also be pallindrome
+    // Need to find the minimum moves to make k pallindrome
+    string s;
+    cin >> s;
+    vector<vector<int>> a(k, vector<int>(26));
+    for (int i = 0; i < n; i++)
+    {
+        a[i % k][s[i] - 'a']++;
+    }
+    int64 result = 0;
+    for (int i = 0, j = k - 1; i <= j; i++, j--)
+    {
+        int m = 0;
+        for (int k = 0; k < 26; k++)
+        {
+            if (i != j)
+            {
+                m = max(m, a[i][k] + a[j][k]);
+            }
+            else
+            {
+                m = max(m, a[i][k]);
+            }
+        }
+        if (i != j)
+        {
+            result += (2 * n / k) - m;
+        }
+        else
+        {
+            result += (n / k) - m;
+        }
+    }
+    cout << result << endl;
 }
 int main()
 {
@@ -71,3 +104,16 @@ int main()
     }
     return EXIT_SUCCESS;
 }
+// wudixia
+// oxingxi
+// ngheclp
+
+// (6-1)+(6-2)+(6-1)+(3-1)
+// axxixxa
+// axxixxa
+// axxixxa
+
+// hippopoto
+// monstrose
+// squippeda
+// liophobia

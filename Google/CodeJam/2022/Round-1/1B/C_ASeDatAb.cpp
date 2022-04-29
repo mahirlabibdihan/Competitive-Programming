@@ -52,22 +52,29 @@ typedef unsigned long long uint64;
 /**********************************************/
 
 /************ SOLUTION *************/
-void solve()
+void solve(string V)
 {
-    int n;
-    cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    // 8 bit string
+    // 2^8 = 256 Possible X
+    // We have 300 chance
+    int N = 1;
+    for (int i = 0; i < 300 && N != 0; i++)
+    {
+        std::rotate(V.begin(), V.begin() + V.size() - 5, V.end());
+        cout << V << flush;
+        cin >> N;
+    }
 }
 int main()
 {
     FAST_IO;
-    int T;
+    int T = 1;
     cin >> T;
     for (int t = 1; t <= T; t++)
     {
-        solve();
+        string V;
+        cin >> V;
+        solve(V);
     }
     return EXIT_SUCCESS;
 }

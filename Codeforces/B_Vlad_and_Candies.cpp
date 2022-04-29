@@ -54,16 +54,34 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
-    int n;
+    int64 n;
     cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
+    vector<int64> a(n);
     cin >> a;
-    cout << a << endl;
+    if (n == 1)
+    {
+        if (a[0] == 1)
+            cout << "YES" << endl;
+        else
+            cout << "NO" << endl;
+    }
+    else
+    {
+        sort(a.begin(), a.end());
+        if (a[n - 1] - a[n - 2] > 1)
+        {
+            cout << "NO" << endl;
+        }
+        else
+        {
+            cout << "YES" << endl;
+        }
+    }
 }
 int main()
 {
     FAST_IO;
-    int T;
+    int T = 1;
     cin >> T;
     for (int t = 1; t <= T; t++)
     {

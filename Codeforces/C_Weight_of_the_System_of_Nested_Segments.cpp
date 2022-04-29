@@ -52,13 +52,49 @@ typedef unsigned long long uint64;
 /**********************************************/
 
 /************ SOLUTION *************/
+struct Point
+{
+    int x, w, id;
+    bool operator<(const Point &p)
+    {
+        return this->w < p.w;
+    }
+};
+struct Point2
+{
+    int x, w, id;
+    bool operator<(const Point2 &p)
+    {
+
+        return this->x < p.x;
+    }
+};
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    int n, m;
+    cin >> n >> m;
+    vector<Point> p(m);
+    for (int i = 0; i < m; i++)
+    {
+        cin >> p[i].x >> p[i].w;
+        p[i].id = i + 1;
+    }
+    sort(p.begin(), p.end());
+
+    vector<Point2> smallest;
+    int64 sum = 0;
+    for (int i = 0; i < 2 * n; i++)
+    {
+        smallest.push_back({p[i].x, p[i].w, p[i].id});
+        sum += p[i].w;
+    }
+    sort(smallest.begin(), smallest.end());
+    cout << sum << endl;
+    for (int i = 0; i < n; i++)
+    {
+        cout << smallest[i].id << " " << smallest[2 * n - i - 1].id << endl;
+    }
+    cout << endl;
 }
 int main()
 {

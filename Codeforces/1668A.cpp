@@ -54,16 +54,29 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    int n, m;
+    cin >> n >> m;
+    int mn = min(n, m);
+    int mx = max(n, m);
+    // mn is 1-> then mx>2 -> -1
+    if (mn == 1 && mx > 2)
+    {
+        cout << -1 << endl;
+    }
+    else
+    {
+        cout << (mn - 1) * 2 + ((mx - mn) / 2) * 4 + ((mx - mn) % 2) << endl;
+    }
+    // 1 -> 0
+    // 2 -> 2
+    // 3 -> 4
+    // 4 -> 6
+    // 5 -> 8
 }
 int main()
 {
     FAST_IO;
-    int T;
+    int T = 1;
     cin >> T;
     for (int t = 1; t <= T; t++)
     {

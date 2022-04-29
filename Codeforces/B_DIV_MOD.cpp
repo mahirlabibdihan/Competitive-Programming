@@ -54,11 +54,24 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    // a is given
+    // f(x) = ceil(x/a)+(x%a)
+    // max(x%a) = a-1
+    // max(x/a) = r/a
+    int64 l, r, a;
+    cin >> l >> r >> a;
+    // either r/a or (r-1)/a
+    int64 m = r / a;
+    // cout << (m - 1) * a + (a - 1) << endl;
+    if ((m - 1) * a + (a - 1) >= l)
+    {
+        cout << max((m - 1) + (a - 1), (r / a) + (r % a)) << endl;
+    }
+    else
+    {
+        cout << (r / a) + (r % a) << endl;
+    }
+    // Division+Remainder must be maximum
 }
 int main()
 {

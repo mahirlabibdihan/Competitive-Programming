@@ -52,13 +52,53 @@ typedef unsigned long long uint64;
 /**********************************************/
 
 /************ SOLUTION *************/
+struct Move
+{
+    int lX, lY, rX, rY;
+};
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    // Bruteforce
+    int n, m;
+    cin >> n >> m;
+    vector<vector<char>> a(n, vector<char>(m));
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            cin >> a[i][j];
+        }
+    }
+    vector<Move> result;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = m - 1; j > 0; j--)
+        {
+            if (a[i][j] == '1')
+            {
+                result.push_back({i + 1, j, i + 1, j + 1});
+            }
+        }
+    }
+    for (int i = n - 1; i > 0; i--)
+    {
+        if (a[i][0] == '1')
+        {
+            result.push_back({i, 1, i + 1, 1});
+        }
+    }
+    if (a[0][0] == '1')
+    {
+        cout << -1 << endl;
+    }
+    else
+    {
+        cout << result.size() << endl;
+        for (auto i : result)
+        {
+            cout << i.lX << " " << i.lY << " " << i.rX << " " << i.rY << endl;
+        }
+    }
 }
 int main()
 {

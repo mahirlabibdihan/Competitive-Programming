@@ -54,18 +54,32 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
+    // Total frequency should be even
     int n;
     cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
+    vector<int> a(n);
     cin >> a;
-    cout << a << endl;
+    int64 sum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        sum += a[i];
+    }
+    int m = *max_element(a.begin(), a.end());
+    if (sum % 2 == 0 && m <= sum - m)
+    {
+        cout << "YES" << endl;
+    }
+    else
+    {
+        cout << "NO" << endl;
+    }
 }
 int main()
 {
     FAST_IO;
     int T;
-    cin >> T;
-    for (int t = 1; t <= T; t++)
+    // cin >> T;
+    // for (int t = 1; t <= T; t++)
     {
         solve();
     }

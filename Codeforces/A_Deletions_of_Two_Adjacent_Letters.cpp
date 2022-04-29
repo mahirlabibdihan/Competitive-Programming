@@ -54,11 +54,30 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    // char c must be in the string
+    // and index c must be even
+    string s;
+    cin >> s;
+    char c;
+    cin >> c;
+    bool flag = false;
+    int n = s.length();
+    for (int i = 0; i < n; i++)
+    {
+        if (s[i] == c && i % 2 == 0)
+        {
+            flag = true;
+            break;
+        }
+    }
+    if (flag)
+    {
+        cout << "YES" << endl;
+    }
+    else
+    {
+        cout << "NO" << endl;
+    }
 }
 int main()
 {

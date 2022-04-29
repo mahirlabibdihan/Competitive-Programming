@@ -56,14 +56,43 @@ void solve()
 {
     int n;
     cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    string s;
+    cin >> s;
+    bool R = false, B = false;
+    for (char c : s)
+    {
+        if (c == 'W')
+        {
+            if (!R ^ !B)
+            {
+                cout << "NO" << endl;
+                return;
+            }
+            else
+            {
+                R = false, B = false;
+            }
+        }
+        else if (c == 'B')
+        {
+            B = true;
+        }
+        else
+        {
+            R = true;
+        }
+    }
+    if (!R ^ !B)
+    {
+        cout << "NO" << endl;
+        return;
+    }
+    cout << "YES" << endl;
 }
 int main()
 {
     FAST_IO;
-    int T;
+    int T = 1;
     cin >> T;
     for (int t = 1; t <= T; t++)
     {

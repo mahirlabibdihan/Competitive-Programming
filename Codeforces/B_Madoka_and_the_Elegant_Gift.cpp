@@ -54,12 +54,60 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    int n, m;
+    cin >> n >> m;
+    vector<vector<char>> a(n, vector<char>(m));
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            cin >> a[i][j];
+        }
+    }
+    // n=1 || m=1 -> YES
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = 0; j < m - 1; j++)
+        {
+            // cout << a[i][j] << " ";
+            if (a[i][j] == '1' && a[i][j + 1] == '1' && a[i + 1][j] == '1' && a[i + 1][j + 1] == '0')
+            {
+                cout << "NO" << endl;
+                return;
+            }
+            if (a[i][j] == '1' && a[i][j + 1] == '0' && a[i + 1][j] == '1' && a[i + 1][j + 1] == '1')
+            {
+                cout << "NO" << endl;
+                return;
+            }
+            if (a[i][j] == '1' && a[i][j + 1] == '1' && a[i + 1][j] == '0' && a[i + 1][j + 1] == '1')
+            {
+                cout << "NO" << endl;
+                return;
+            }
+            if (a[i][j] == '0' && a[i][j + 1] == '1' && a[i + 1][j] == '1' && a[i + 1][j + 1] == '1')
+            {
+                cout << "NO" << endl;
+                return;
+            }
+        }
+        // cout << endl;
+    }
+    cout << "YES" << endl;
 }
+/*
+1 1
+1 0
+
+1 0
+1 1
+
+1 1
+0 1
+
+0 1
+1 1
+*/
 int main()
 {
     FAST_IO;

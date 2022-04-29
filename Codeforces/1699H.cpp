@@ -54,16 +54,36 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
+    int64 n, k;
+    cin >> n >> k;
+    vector<int> a(n);
     cin >> a;
-    cout << a << endl;
+    vector<int> count(31, 0);
+    for (int i = 0; i <= 30; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if ((a[j] & (1 << i)) > 0)
+                count[i]++;
+        }
+    }
+    int64 result = 0;
+    for (int i = 30; i >= 0; i--)
+    {
+        // cout << count[i] << " ";
+        if (n - count[i] <= k)
+        {
+            result |= (1 << i);
+            k -= (n - count[i]);
+            // cout << i << endl;
+        }
+    }
+    cout << result << endl;
 }
 int main()
 {
     FAST_IO;
-    int T;
+    int T = 1;
     cin >> T;
     for (int t = 1; t <= T; t++)
     {

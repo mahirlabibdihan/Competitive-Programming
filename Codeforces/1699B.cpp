@@ -56,14 +56,27 @@ void solve()
 {
     int n;
     cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
+    vector<int> a(n);
     cin >> a;
-    cout << a << endl;
+    vector<int> count(n + 1);
+    for (int i : a)
+    {
+        count[i]++;
+    }
+    for (int i = 0; i <= n; i++)
+    {
+        if (count[i] > 2)
+        {
+            cout << i << endl;
+            return;
+        }
+    }
+    cout << -1 << endl;
 }
 int main()
 {
     FAST_IO;
-    int T;
+    int T = 1;
     cin >> T;
     for (int t = 1; t <= T; t++)
     {

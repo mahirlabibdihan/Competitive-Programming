@@ -52,18 +52,59 @@ typedef unsigned long long uint64;
 /**********************************************/
 
 /************ SOLUTION *************/
+class Point
+{
+public:
+    int x, y;
+    Point()
+    {
+    }
+    Point(int x, int y)
+    {
+        this->x = x;
+        this->y = y;
+    }
+};
+bool compX(const Point &a, const Point &b)
+{
+    return a.x < b.x;
+}
+bool compY(const Point &a, const Point &b)
+{
+    return a.y < b.y;
+}
 void solve()
 {
     int n;
     cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    vector<Point> a(n);
+    for (int i = 0; i < n; i++)
+    {
+        cin >> a[i].x >> a[i].y;
+    }
+    // vector<int> b(a);
+    sort(a.begin(), a.end(), compX);
+    vector<int> preSum(n), postSum(n), sum(n);
+    preSum[0] = 0;
+    for (int i = 1; i < n; i++)
+    {
+        preSum[i] = preSum[i - 1] + i * (a[i].x - a[i - 1].x);
+    }
+    postSum[n - 1] = 0;
+    for (int i = n - 2; i >= 0; i--)
+    {
+        postSum[i] = postSum[i + 1] + (n - i - 1) * (a[i + 1].x - a[i].x);
+    }
+    for (int i = 0; i < n; i++)
+    {
+        sum[i] = preSum[i] + postSum[i];
+    }
+    cout << sum << endl;
 }
 int main()
 {
     FAST_IO;
-    int T;
+    int T = 1;
     cin >> T;
     for (int t = 1; t <= T; t++)
     {
@@ -71,3 +112,5 @@ int main()
     }
     return EXIT_SUCCESS;
 }
+// 1 2 3 4
+// 0 1 3 6

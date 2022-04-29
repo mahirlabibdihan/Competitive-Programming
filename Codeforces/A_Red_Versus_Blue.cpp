@@ -54,16 +54,43 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    // b<r
+    int64 n, r, b;
+    cin >> n >> r >> b;
+    // b will be in middle
+    int64 mx = ceil(1.0 * r / b);
+    for (int i = 0; i < b; i++)
+    {
+        int k = mx;
+        for (int j = mx; j >= 0; j--)
+        {
+            if (ceil(1.0 * (r - j) / (b - i)) <= j)
+            {
+                k = j;
+            }
+            else
+            {
+                break;
+            }
+        }
+        // cout << k << " ";
+        r -= k;
+        for (int j = 0; j < k; j++)
+        {
+            cout << 'R';
+        }
+        cout << 'B';
+    }
+    for (int j = 0; j < r; j++)
+    {
+        cout << 'R';
+    }
+    cout << endl;
 }
 int main()
 {
     FAST_IO;
-    int T;
+    int T = 1;
     cin >> T;
     for (int t = 1; t <= T; t++)
     {
@@ -71,3 +98,6 @@ int main()
     }
     return EXIT_SUCCESS;
 }
+
+// 9 7 2
+//

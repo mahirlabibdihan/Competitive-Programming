@@ -8,6 +8,7 @@
 M A H I R     L A B I B     D I H A N
 
 */
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -54,18 +55,32 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    // After each query I have to change the last inserted element
+    int q, x;
+    cin >> q >> x;
+    vector<int> mods(x, 0);
+    set<pair<int, int>> freq;
+    for (int i = 0; i < x; i++)
+    {
+        freq.insert({mods[i], i});
+    }
+    while (q--)
+    {
+        int y;
+        cin >> y;
+        y %= x;
+        // Increase key
+        freq.erase({mods[y], y});
+        freq.insert({++mods[y], y});
+        cout << freq.begin()->first * x + freq.begin()->second << endl;
+    }
 }
 int main()
 {
     FAST_IO;
     int T;
-    cin >> T;
-    for (int t = 1; t <= T; t++)
+    // cin >> T;
+    // for (int t = 1; t <= T; t++)
     {
         solve();
     }

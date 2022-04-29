@@ -52,22 +52,41 @@ typedef unsigned long long uint64;
 /**********************************************/
 
 /************ SOLUTION *************/
-void solve()
+double solve(int64 R, int64 A, int64 B)
 {
-    int n;
-    cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    // Right circle will be zero first
+    // Suppose after k turns right circle is zero at k+1
+    // R +R*A
+    // R/B + R*A*A/B
+    // floor(1+A^(i))/(B^(i-1))
+    // R*floor(1+A^(i+1))/(B^i)
+    double sum = 0;
+    int64 rL = R, rR = rL * A;
+    for (int i = 0;; i++)
+    {
+        if (rL == 0)
+            break;
+        // cout << rL << " " << rR << endl;
+        sum = sum + (rL * rL);
+        sum = sum + (rR * rR);
+        rL = rR / B;
+        rR = rL * A;
+    }
+    sum = sum * acos(-1);
+    return sum;
 }
 int main()
 {
     FAST_IO;
-    int T;
+    int T = 1;
     cin >> T;
     for (int t = 1; t <= T; t++)
     {
-        solve();
+        int64 R, A, B;
+        cin >> R >> A >> B;
+        double s = solve(R, A, B);
+        // cout << "Case #" << t << ": " << s << '\n';
+        printf("Case #%d: %lf\n", t, s);
     }
     return EXIT_SUCCESS;
 }

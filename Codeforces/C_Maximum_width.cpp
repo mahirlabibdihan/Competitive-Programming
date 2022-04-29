@@ -51,21 +51,52 @@ typedef long long int64;
 typedef unsigned long long uint64;
 /**********************************************/
 
-/************ SOLUTION *************/
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    int n, m;
+    cin >> n >> m;
+    string s, t;
+    cin >> s >> t;
+    vector<pair<int, int>> p(m);
+    for (int i = 0, j = 0; i < m; i++)
+    {
+        for (; j < n; j++)
+        {
+            if (s[j] == t[i])
+            {
+                p[i].first = j++;
+                break;
+            }
+        }
+    }
+    for (int i = m - 1, j = n - 1; i >= 0; i--)
+    {
+        for (; j >= 0; j--)
+        {
+            if (s[j] == t[i])
+            {
+                p[i].second = j--;
+                break;
+            }
+        }
+    }
+    // for (int i = 0; i < m; i++)
+    // {
+    //     cout << p[i].first << " " << p[i].second << endl;
+    // }
+    int maxWidth = 0;
+    for (int i = 1; i < m; i++)
+    {
+        maxWidth = max(maxWidth, p[i].second - p[i - 1].first);
+    }
+    cout << maxWidth << endl;
 }
 int main()
 {
     FAST_IO;
     int T;
-    cin >> T;
-    for (int t = 1; t <= T; t++)
+    // cin >> T;
+    // for (int t = 1; t <= T; t++)
     {
         solve();
     }

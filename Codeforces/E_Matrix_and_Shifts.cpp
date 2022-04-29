@@ -54,16 +54,38 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
+    // Main goal is to bring the maximum possible 1 in main diagonal
+    // We can only think about shift up and shift right
+    // n<2000
     int n;
     cin >> n;
-    vector<vector<int>> a(n, vector<int>(n));
-    cin >> a;
-    cout << a << endl;
+    vector<string> s(n);
+    for (int i = 0; i < n; i++)
+    {
+        cin >> s[i];
+    }
+    int maxOne = 0;
+    int totalOne = 0;
+    for (int i = 0; i < n; i++)
+    {
+        int one = 0;
+        for (int j = 0, k = i; j < n; j++, k = (k + 1) % n)
+        {
+            if (s[j][k] == '1')
+            {
+                one++;
+                totalOne++;
+            }
+        }
+        maxOne = max(maxOne, one);
+    }
+    // cout << maxOne << endl;
+    cout << n - maxOne + totalOne - maxOne << endl;
 }
 int main()
 {
     FAST_IO;
-    int T;
+    int T = 1;
     cin >> T;
     for (int t = 1; t <= T; t++)
     {
