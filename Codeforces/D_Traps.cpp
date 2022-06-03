@@ -52,26 +52,52 @@ typedef unsigned long long uint64;
 /**********************************************/
 
 /************ SOLUTION *************/
+bool cmp(pair<int, int> a, pair<int, int> b)
+{
+    if (a.first < b.first)
+        return true;
+    else if (a.first == b.first and a.second > b.second)
+        return true;
+    else
+        return false;
+}
 void solve()
 {
-    int64 n, x, y;
-    cin >> n >> x >> y;
-    vector<int64> a(n);
+    int n, k;
+    cin >> n >> k;
+    vector<int> a(n);
+    vector<bool> j(n, false);
+    vector<pair<int, int>> b(n);
     cin >> a;
-    // Count of odd number even = Sum of odd number even
-    uint64 sum = 0;
-    for (int64 i : a)
+    for (int i = 0; i < n; i++)
     {
-        sum += i;
+        b[i].first = (n - i - 1) - a[i];
+        b[i].second = i;
     }
-    if (((sum % 2) && (x % 2) != (y % 2)) || (!(sum % 2) && (x % 2) == (y % 2)))
+    sort(b.begin(), b.end(), cmp);
+    for (int i = 0; i < k; i++)
     {
-        cout << "Alice" << endl;
+        j[b[i].second] = true;
     }
-    else
+    int c = 0;
+    int64 sum = 0;
+    for (int i = 0; i < n; i++)
     {
-        cout << "Bob" << endl;
+        if (j[i])
+        {
+            c++;
+        }
+        else
+        {
+            sum += a[i] + c;
+        }
     }
+    // for (int i = 0; i < n; i++)
+    // {
+    //     cout << j[i] << " ";
+    // }
+    // cout << endl;
+    cout << sum << endl;
 }
 int main()
 {

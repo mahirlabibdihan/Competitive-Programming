@@ -1,5 +1,5 @@
 /*
- ______   _________ _      _       _
+______   _________ _      _       _
 |  ____ \|___   ___| |    | |     | |
 | |    \ \   | |   | |____| |     | |
 | |    | |   | |   |  ____  |     | |
@@ -54,24 +54,29 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
-    int64 n, x, y;
-    cin >> n >> x >> y;
-    vector<int64> a(n);
-    cin >> a;
-    // Count of odd number even = Sum of odd number even
-    uint64 sum = 0;
-    for (int64 i : a)
+    int64 n, m, x;
+    cin >> n >> m >> x;
+    if (m == x)
     {
-        sum += i;
-    }
-    if (((sum % 2) && (x % 2) != (y % 2)) || (!(sum % 2) && (x % 2) == (y % 2)))
-    {
-        cout << "Alice" << endl;
+        cout << 0 << endl;
     }
     else
     {
-        cout << "Bob" << endl;
+        for (int i = n - 1; i >= 0; i--)
+        {
+            if ((n * x) >= ((x + 1) * i))
+            {
+                cout << i << endl;
+                return;
+            }
+        }
     }
+    // cout << endl;
+    // n*x = (x+1)*u +
+    // 0 to M
+
+    // a[0]+a[1]+ ... = n*x
+    //
 }
 int main()
 {

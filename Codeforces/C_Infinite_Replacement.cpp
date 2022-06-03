@@ -52,25 +52,34 @@ typedef unsigned long long uint64;
 /**********************************************/
 
 /************ SOLUTION *************/
+bool containsA(string t)
+{
+    for (char c : t)
+    {
+        if (c == 'a')
+        {
+            return true;
+        }
+    }
+    return false;
+}
 void solve()
 {
-    int64 n, x, y;
-    cin >> n >> x >> y;
-    vector<int64> a(n);
-    cin >> a;
-    // Count of odd number even = Sum of odd number even
-    uint64 sum = 0;
-    for (int64 i : a)
+    string s, t;
+    cin >> s >> t;
+    if ((t.length() == 1 && t[0] == 'a'))
     {
-        sum += i;
+        cout << 1 << endl;
     }
-    if (((sum % 2) && (x % 2) != (y % 2)) || (!(sum % 2) && (x % 2) == (y % 2)))
+    else if (containsA(t))
     {
-        cout << "Alice" << endl;
+        cout << -1 << endl;
     }
     else
     {
-        cout << "Bob" << endl;
+        int64 res = 1;
+        // 2^|s|
+        cout << (res << (s.length())) << endl;
     }
 }
 int main()

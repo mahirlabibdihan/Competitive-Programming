@@ -54,23 +54,27 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
-    int64 n, x, y;
-    cin >> n >> x >> y;
-    vector<int64> a(n);
+    // a->b . I have n/2 options
+    // b->c . I have n/2 options
+    // b should be in increasing order from middle to end
+    int n;
+    cin >> n;
+    vector<int> a(n);
     cin >> a;
-    // Count of odd number even = Sum of odd number even
-    uint64 sum = 0;
-    for (int64 i : a)
+    for (int i = n - 1; i > 0; i -= 2)
     {
-        sum += i;
+        if (a[i] < a[i - 1])
+        {
+            swap(a[i], a[i - 1]);
+        }
     }
-    if (((sum % 2) && (x % 2) != (y % 2)) || (!(sum % 2) && (x % 2) == (y % 2)))
+    if (is_sorted(a.begin(), a.end()))
     {
-        cout << "Alice" << endl;
+        cout << "YES" << endl;
     }
     else
     {
-        cout << "Bob" << endl;
+        cout << "NO" << endl;
     }
 }
 int main()

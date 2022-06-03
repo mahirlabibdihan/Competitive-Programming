@@ -54,24 +54,26 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
-    int64 n, x, y;
-    cin >> n >> x >> y;
-    vector<int64> a(n);
-    cin >> a;
-    // Count of odd number even = Sum of odd number even
-    uint64 sum = 0;
-    for (int64 i : a)
+    vector<pair<uint64, int>> v(3);
+    for (int i = 0; i < 3; i++)
     {
-        sum += i;
+        cin >> v[i].first;
+        v[i].second = i;
     }
-    if (((sum % 2) && (x % 2) != (y % 2)) || (!(sum % 2) && (x % 2) == (y % 2)))
+    sort(v.begin(), v.end());
+    vector<uint64> u(3);
+    u[0] = v[0].first + v[1].first + v[2].first;
+    u[1] = v[1].first + v[2].first;
+    u[2] = v[2].first;
+
+    vector<uint64> w(3);
+    for (int i = 0; i < 3; i++)
     {
-        cout << "Alice" << endl;
+        w[v[i].second] = u[i];
     }
-    else
-    {
-        cout << "Bob" << endl;
-    }
+    cout << w << endl;
+    // uint64 x = w[0], y = w[1], z = w[2];
+    // cout << x % y << " " << y % z << " " << z % x << endl;
 }
 int main()
 {

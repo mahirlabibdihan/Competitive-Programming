@@ -52,26 +52,29 @@ typedef unsigned long long uint64;
 /**********************************************/
 
 /************ SOLUTION *************/
+#define MOD 1000000007;
+int64 power(int n, int p)
+{
+    int64 res = 1;
+    while (p--)
+    {
+        res = (res * n) % MOD;
+    }
+    return res;
+}
 void solve()
 {
-    int64 n, x, y;
-    cin >> n >> x >> y;
-    vector<int64> a(n);
-    cin >> a;
-    // Count of odd number even = Sum of odd number even
-    uint64 sum = 0;
-    for (int64 i : a)
+    int n, k;
+    cin >> n >> k;
+    int64 sum = 0;
+    for (int i = 0; (1 << i) <= k; i++) // log(k)
     {
-        sum += i;
+        if (k & (1 << i))
+        {
+            sum = (sum + power(n, i)) % MOD;
+        }
     }
-    if (((sum % 2) && (x % 2) != (y % 2)) || (!(sum % 2) && (x % 2) == (y % 2)))
-    {
-        cout << "Alice" << endl;
-    }
-    else
-    {
-        cout << "Bob" << endl;
-    }
+    cout << sum << endl;
 }
 int main()
 {

@@ -52,25 +52,28 @@ typedef unsigned long long uint64;
 /**********************************************/
 
 /************ SOLUTION *************/
-void solve()
+vector<int> solve(int n, int x, int y)
 {
-    int64 n, x, y;
-    cin >> n >> x >> y;
-    vector<int64> a(n);
-    cin >> a;
-    // Count of odd number even = Sum of odd number even
-    uint64 sum = 0;
-    for (int64 i : a)
+    int sum = n * (n + 1) / 2;
+    if (sum % (x + y) == 0)
     {
-        sum += i;
-    }
-    if (((sum % 2) && (x % 2) != (y % 2)) || (!(sum % 2) && (x % 2) == (y % 2)))
-    {
-        cout << "Alice" << endl;
+        int k = sum / (x + y);
+        x *= k;
+        y *= k;
+        vector<int> result;
+        for (int i = n; i >= 0 && x > 0; i--)
+        {
+            if (i <= x)
+            {
+                result.push_back(i);
+                x -= i;
+            }
+        }
+        return result;
     }
     else
     {
-        cout << "Bob" << endl;
+        return vector<int>();
     }
 }
 int main()
@@ -80,7 +83,25 @@ int main()
     cin >> T;
     for (int t = 1; t <= T; t++)
     {
-        solve();
+        int n, x, y;
+        cin >> n >> x >> y;
+        vector<int> res = solve(n, x, y);
+        cout << "Case #" << t << ": ";
+        if (res.size() == 0)
+        {
+            cout << "IMPOSSIBLE" << endl;
+        }
+        else
+        {
+            cout << "POSSIBLE" << endl;
+            // cout
+            cout << res.size() << endl;
+            for (int i : res)
+            {
+                cout << i << " ";
+            }
+            cout << endl;
+        }
     }
     return EXIT_SUCCESS;
 }

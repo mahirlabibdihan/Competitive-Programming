@@ -54,25 +54,39 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
-    int64 n, x, y;
-    cin >> n >> x >> y;
-    vector<int64> a(n);
+    // No duplicate exists
+    // Duplicate number exists
+    // 0 exists
+    int n;
+    cin >> n;
+    vector<int> a(n);
     cin >> a;
-    // Count of odd number even = Sum of odd number even
-    uint64 sum = 0;
-    for (int64 i : a)
+    map<int, int> count;
+    int nZero = 0;
+    for (int i = 0; i < n; i++)
     {
-        sum += i;
+        if (a[i] == 0)
+        {
+            nZero++;
+        }
     }
-    if (((sum % 2) && (x % 2) != (y % 2)) || (!(sum % 2) && (x % 2) == (y % 2)))
+    if (nZero > 0)
     {
-        cout << "Alice" << endl;
+        cout << n - nZero << endl;
+        return;
     }
-    else
+    for (int i = 0; i < n; i++)
     {
-        cout << "Bob" << endl;
+        if (count[a[i]] > 0)
+        {
+            cout << n << endl;
+            return;
+        }
+        count[a[i]]++;
     }
+    cout << n + 1 << endl;
 }
+
 int main()
 {
     FAST_IO;

@@ -52,26 +52,74 @@ typedef unsigned long long uint64;
 /**********************************************/
 
 /************ SOLUTION *************/
-void solve()
+bool hasUpperCase(string s)
 {
-    int64 n, x, y;
-    cin >> n >> x >> y;
-    vector<int64> a(n);
-    cin >> a;
-    // Count of odd number even = Sum of odd number even
-    uint64 sum = 0;
-    for (int64 i : a)
+    for (char c : s)
     {
-        sum += i;
+        if (c >= 'A' && c <= 'Z')
+        {
+            return true;
+        }
     }
-    if (((sum % 2) && (x % 2) != (y % 2)) || (!(sum % 2) && (x % 2) == (y % 2)))
+    return false;
+}
+bool hasLowerCase(string s)
+{
+    for (char c : s)
     {
-        cout << "Alice" << endl;
+        if (c >= 'a' && c <= 'z')
+        {
+            return true;
+        }
     }
-    else
+    return false;
+}
+bool hasDigit(string s)
+{
+    for (char c : s)
     {
-        cout << "Bob" << endl;
+        if (c >= '0' && c <= '9')
+        {
+            return true;
+        }
     }
+    return false;
+}
+bool hasSpecialChar(string s)
+{
+    for (char c : s)
+    {
+        if (c == '#' || c == '@' || c == '*' || c == '&')
+        {
+            return true;
+        }
+    }
+    return false;
+}
+string solve(string s, int n)
+{
+    if (!hasUpperCase(s))
+    {
+        s += 'A';
+    }
+    if (!hasLowerCase(s))
+    {
+        s += 'a';
+    }
+    if (!hasDigit(s))
+    {
+        s += '0';
+    }
+    if (!hasSpecialChar(s))
+    {
+        s += '#';
+    }
+    while (s.length() < 7)
+    {
+        s += '0';
+    }
+    // cout << s << endl;
+    return s;
 }
 int main()
 {
@@ -80,7 +128,14 @@ int main()
     cin >> T;
     for (int t = 1; t <= T; t++)
     {
-        solve();
+        int n;
+        cin >> n;
+        string s;
+        cin >> s;
+        // string res = solve(s, n);
+        // cout << "Case #" << t << ": " << s << '\n';
+        cout << "Case #" << t << ": " << solve(s, n) << endl;
+        // cout << solve(s, n) << '\n';
     }
     return EXIT_SUCCESS;
 }

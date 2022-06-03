@@ -54,24 +54,60 @@ typedef unsigned long long uint64;
 /************ SOLUTION *************/
 void solve()
 {
-    int64 n, x, y;
-    cin >> n >> x >> y;
-    vector<int64> a(n);
+    // 2 2 3 4 0 1 2 0
+    // 5 5 5 3 3 3 1 1
+    // 0 0 0 0 1 5 5 5
+    // ------------0 1
+    // 2 2 3 4 4 4 4 4
+    int n;
+    cin >> n;
+    vector<int> a(n);
     cin >> a;
-    // Count of odd number even = Sum of odd number even
-    uint64 sum = 0;
-    for (int64 i : a)
+    vector<bool> visited(n + 1);
+    vector<int> postMex(n);
+    int mex = 0;
+    for (int i = n - 1; i >= 0; i--)
     {
-        sum += i;
+        visited[a[i]] = true;
+        for (; mex <= n; mex++)
+        {
+            if (!visited[mex])
+            {
+                break;
+            }
+        }
+        postMex[i] = mex;
     }
-    if (((sum % 2) && (x % 2) != (y % 2)) || (!(sum % 2) && (x % 2) == (y % 2)))
+    // cout << postMex << endl;
+    fill(visited.begin(), visited.end(), false);
+    vector<int> b;
+    int target = -1;
+    mex = 0;
+    for (int i = 0; i < n; i++)
     {
-        cout << "Alice" << endl;
+        if (target == -1)
+        {
+            target = postMex[i];
+        }
+        visited[a[i]] = true;
+        for (; mex <= n; mex++)
+        {
+            if (!visited[mex])
+            {
+                break;
+            }
+        }
+        if (mex == target)
+        {
+            b.push_back(mex);
+            mex = 0;
+            // visited = vector<bool>(n + 1);
+            fill(visited.begin(), visited.end(), false);
+            target = -1;
+        }
     }
-    else
-    {
-        cout << "Bob" << endl;
-    }
+    cout << b.size() << endl;
+    cout << b << endl;
 }
 int main()
 {

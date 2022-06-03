@@ -52,26 +52,33 @@ typedef unsigned long long uint64;
 /**********************************************/
 
 /************ SOLUTION *************/
+// int64 DP(vector<int> a, int i)
+// {
+//     int x = a[i] + ;
+//     return max()
+// }
 void solve()
 {
-    int64 n, x, y;
-    cin >> n >> x >> y;
-    vector<int64> a(n);
+    int n;
+    cin >> n;
+    vector<int> a(n);
     cin >> a;
-    // Count of odd number even = Sum of odd number even
-    uint64 sum = 0;
-    for (int64 i : a)
+    sort(a.begin(), a.end());
+    // There can be 1 to n subsequence
+    // (1+2+3)/3
+    // (1/4)+(2/4)+(3/2)
+    double s1 = 0, s2 = 0;
+    for (int i = 0; i < ceil(n / 2.0); i++)
     {
-        sum += i;
+        s1 += a[i];
     }
-    if (((sum % 2) && (x % 2) != (y % 2)) || (!(sum % 2) && (x % 2) == (y % 2)))
+    for (int i = ceil(n / 2.0); i < n; i++)
     {
-        cout << "Alice" << endl;
+        s2 += a[i];
     }
-    else
-    {
-        cout << "Bob" << endl;
-    }
+    s1 /= ceil(n / 2.0);
+    s2 /= floor(n / 2.0);
+    cout << (s1 + s2) / 2.0 << endl;
 }
 int main()
 {

@@ -52,26 +52,67 @@ typedef unsigned long long uint64;
 /**********************************************/
 
 /************ SOLUTION *************/
+int c;
+vector<int> paths[200000 + 1];
+vector<int> child[200000 + 1];
+void createPath(int u)
+{
+    // cout << u << " ";
+    paths[c].push_back(u);
+    if (child[u].empty())
+    {
+        c++;
+        return;
+    }
+    for (int v : child[u])
+    {
+        createPath(v);
+    }
+}
 void solve()
 {
-    int64 n, x, y;
-    cin >> n >> x >> y;
-    vector<int64> a(n);
-    cin >> a;
-    // Count of odd number even = Sum of odd number even
-    uint64 sum = 0;
-    for (int64 i : a)
+    int n;
+    cin >> n;
+    vector<int> a(n + 1);
+    for (int i = 0; i <= n; i++)
     {
-        sum += i;
+        paths[i].clear();
+        child[i].clear();
     }
-    if (((sum % 2) && (x % 2) != (y % 2)) || (!(sum % 2) && (x % 2) == (y % 2)))
+    for (int i = 1; i <= n; i++)
     {
-        cout << "Alice" << endl;
+        cin >> a[i];
     }
-    else
+    int root = 0;
+    for (int i = 1; i <= n; i++)
     {
-        cout << "Bob" << endl;
+        // cout << a[i] << " ";
+        if (a[i] == i)
+        {
+            root = i;
+        }
+        else
+        {
+            child[a[i]].push_back(i);
+        }
     }
+    // for (int i = 1; i <= n; i++)
+    //     cout << child[i] << endl;
+    // cout << "---" << endl;
+    c = 0;
+    createPath(root);
+    cout << c << endl;
+    for (int i = 0; i < c; i++)
+    {
+        cout << paths[i].size() << endl;
+        for (int j : paths[i])
+        {
+            cout << j << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+    // Path is equal to the number of leaves
 }
 int main()
 {
